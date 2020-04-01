@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">banner_banner_form.banner_banner_form_data_source</item>
+            <item name="deps" xsi:type="string">banner_banner_form.banner_banner_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="config" xsi:type="array">
+            <item name="dataScope" xsi:type="string">data</item>
+            <item name="namespace" xsi:type="string">banner_banner_form</item>
+        </item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <item name="buttons" xsi:type="array">
+            <item name="back" xsi:type="string">Vkr\Kalman\Block\Adminhtml\Attributes\Edit\Form\Button\Back</item>
+            <item name="delete" xsi:type="string">Vkr\Kalman\Block\Adminhtml\Attributes\Edit\Form\Button\Delete</item>
+            <item name="reset" xsi:type="string">Vkr\Kalman\Block\Adminhtml\Attributes\Edit\Form\Button\Reset</item>
+            <item name="save" xsi:type="string">Vkr\Kalman\Block\Adminhtml\Attributes\Edit\Form\Button\Save</item>
+            <item name="save_and_continue" xsi:type="string">Vkr\Kalman\Block\Adminhtml\Attributes\Edit\Form\Button\SaveAndContinue</item>
+        </item>
+    </argument>
+    <dataSource name="banner_banner_form_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Vkr\Kalman\Ui\DataProvider\Kalman\Form\DataProvider</argument>
+            <argument name="name" xsi:type="string">banner_banner_form_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="submit_url" xsi:type="url" path="banner/banner/save"/>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+    <fieldset name="general">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">General</item>
+            </item>
+        </argument>
+        <field name="id">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="dataScope" xsi:type="string">id</item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_shown">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Is showing</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">5</item>
+                    <item name="dataScope" xsi:type="string">is_shown</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                    <item name="disabled" xsi:type="boolean">true</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">The status is checking before display on site. It is collecting on schedule from settings below (enable status and period)</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="is_enabled">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Enable Kalman</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">8</item>
+                    <item name="dataScope" xsi:type="string">is_enabled</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">1</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">If disabled, than banner will never be shown on page. If enabled, than the activity period below is checking (is the current date suitable for it or is it empty)</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <container name="date_group" component="Magento_Ui/js/form/components/group" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="additionalClasses" xsi:type="string">admin__control-grouped-date</item>
+                    <item name="label" xsi:type="string" translate="true">Activity dates</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="enabled_from" sortOrder="10" formElement="date">
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                    </additionalClasses>
+                    <dataType>string</dataType>
+                    <label translate="true">Enabled from</label>
+                </settings>
+                <formElements>
+                    <date>
+                        <settings>
+                            <options>
+                                <option name="showsTime" xsi:type="boolean">true</option>
+                            </options>
+                        </settings>
+                    </date>
+                </formElements>
+            </field>
+            <field name="enabled_to" sortOrder="20" formElement="date">
+                <settings>
+                    <scopeLabel/>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                    </additionalClasses>
+                    <dataType>string</dataType>
+                    <label translate="true">To</label>
+                </settings>
+                <formElements>
+                    <date>
+                        <settings>
+                            <options>
+                                <option name="showsTime" xsi:type="boolean">true</option>
+                            </options>
+                        </settings>
+                    </date>
+                </formElements>
+            </field>
+        </container>
+        <field name="name">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Name</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">15</item>
+                    <item name="dataScope" xsi:type="string">name</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="tooltip" xsi:type="array">
+                        <item name="description" xsi:type="string" translate="true">Internal name to display in admin</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="title">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">title</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="button_label">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Button label</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="dataScope" xsi:type="string">button_label</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+        <field name="url">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">URL</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="dataScope" xsi:type="string">url</item>
+                </item>
+            </argument>
+        </field>
+        <!--field name="url_is_external">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="label" xsi:type="string" translate="true">Open URL in new window</item>
+                    <item name="formElement" xsi:type="string">checkbox</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                    <item name="dataScope" xsi:type="string">url_is_external</item>
+                    <item name="prefer" xsi:type="string">toggle</item>
+                    <item name="valueMap" xsi:type="array">
+                        <item name="true" xsi:type="number">1</item>
+                        <item name="false" xsi:type="number">0</item>
+                    </item>
+                    <item name="default" xsi:type="number">0</item>
+                </item>
+            </argument>
+        </field-->
+        <field name="content">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Description</item>
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="wysiwyg" xsi:type="boolean">true</item>
+                    <item name="dataScope" xsi:type="string">content</item>
+                    <item name="sortOrder" xsi:type="number">110</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+    <fieldset name="images">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string">Images</item>
+            </item>
+        </argument>
+        <container name="image_position" component="Magento_Ui/js/form/components/group" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="image">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">string</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="label" xsi:type="string" translate="true">General Image</item>
+                        <item name="formElement" xsi:type="string">fileUploader</item>
+                        <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                        <item name="previewTmpl" xsi:type="string">Vkr_Kalman/image-preview</item>
+                        <item name="required" xsi:type="boolean">true</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="uploaderConfig" xsi:type="array">
+                            <item name="url" xsi:type="url" path="banner/banner_image/upload/type/image"/>
+                        </item>
+                        <item name="validation" xsi:type="array">
+                            <item name="required-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-hide-label">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+            <field name="image_hor_align">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Image horizontal alignment</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="dataScope" xsi:type="string">image_hor_align</item>
+                    </item>
+                    <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Image\HorizontalAlignment</item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+            <field name="image_vert_align">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Image vertical alignment</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="sortOrder" xsi:type="number">30</item>
+                        <item name="dataScope" xsi:type="string">image_vert_align</item>
+                    </item>
+                    <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Image\VerticalAlignment</item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+        </container>
+        <container name="tablet_image_position" component="Magento_Ui/js/form/components/group" sortOrder="20">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="tablet_image">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">string</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="label" xsi:type="string" translate="true">Tablet Image</item>
+                        <item name="visible" xsi:type="boolean">true</item>
+                        <item name="formElement" xsi:type="string">fileUploader</item>
+                        <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                        <item name="previewTmpl" xsi:type="string">Vkr_Kalman/image-preview</item>
+                        <item name="required" xsi:type="boolean">false</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="uploaderConfig" xsi:type="array">
+                            <item name="url" xsi:type="url" path="banner/banner_image/upload/type/tablet_image"/>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-hide-label">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+            <field name="tablet_image_hor_align">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Image horizontal alignment</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="dataScope" xsi:type="string">tablet_image_hor_align</item>
+                    </item>
+                    <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Image\HorizontalAlignment</item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+            <field name="tablet_image_vert_align">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Image vertical alignment</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="sortOrder" xsi:type="number">30</item>
+                        <item name="dataScope" xsi:type="string">tablet_image_vert_align</item>
+                    </item>
+                    <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Image\VerticalAlignment</item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+        </container>
+        <container name="mobile_image_position" component="Magento_Ui/js/form/components/group" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="mobile_image">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">string</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="label" xsi:type="string" translate="true">Mobile Image</item>
+                        <item name="formElement" xsi:type="string">fileUploader</item>
+                        <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                        <item name="previewTmpl" xsi:type="string">Vkr_Kalman/image-preview</item>
+                        <item name="required" xsi:type="boolean">false</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="uploaderConfig" xsi:type="array">
+                            <item name="url" xsi:type="url" path="banner/banner_image/upload/type/mobile_image"/>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-hide-label">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+            <field name="mobile_image_hor_align">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Image horizontal alignment</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="dataScope" xsi:type="string">mobile_image_hor_align</item>
+                    </item>
+                    <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Image\HorizontalAlignment</item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+            <field name="mobile_image_vert_align">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Image vertical alignment</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="sortOrder" xsi:type="number">30</item>
+                        <item name="dataScope" xsi:type="string">mobile_image_vert_align</item>
+                    </item>
+                    <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Image\VerticalAlignment</item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+        </container>
+        <container name="application_image_position" component="Magento_Ui/js/form/components/group" sortOrder="40">
+            <argument name="data" xsi:type="array">
+                <item name="type" xsi:type="string">group</item>
+                <item name="config" xsi:type="array">
+                    <item name="required" xsi:type="boolean">false</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+            <field name="application_image">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">string</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="label" xsi:type="string" translate="true">Application Image</item>
+                        <item name="formElement" xsi:type="string">fileUploader</item>
+                        <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                        <item name="previewTmpl" xsi:type="string">Vkr_Kalman/image-preview</item>
+                        <item name="required" xsi:type="boolean">false</item>
+                        <item name="sortOrder" xsi:type="number">10</item>
+                        <item name="uploaderConfig" xsi:type="array">
+                            <item name="url" xsi:type="url" path="banner/banner_image/upload/type/application_image"/>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-hide-label">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+            <field name="application_image_hor_align">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Image horizontal alignment</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="sortOrder" xsi:type="number">20</item>
+                        <item name="dataScope" xsi:type="string">application_image_hor_align</item>
+                    </item>
+                    <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Image\HorizontalAlignment</item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+            <field name="application_image_vert_align">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="label" xsi:type="string" translate="true">Image vertical alignment</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                        <item name="source" xsi:type="string">banner</item>
+                        <item name="sortOrder" xsi:type="number">30</item>
+                        <item name="dataScope" xsi:type="string">application_image_vert_align</item>
+                    </item>
+                    <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Image\VerticalAlignment</item>
+                </argument>
+                <settings>
+                    <additionalClasses>
+                        <class name="admin__field-date">true</class>
+                        <class name="admin__field-align-3">true</class>
+                    </additionalClasses>
+                </settings>
+            </field>
+        </container>
+
+        <field name="webp_quality">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Webp image quality</item>
+                    <item name="notice" xsi:type="string" translate="true">Default value is in Stores > Configuration > Catalog > Kalman > General</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="dataScope" xsi:type="string">webp_quality</item>
+                    <item name="required" xsi:type="boolean">false</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+
+    <fieldset name="color_theme">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="label" xsi:type="string" translate="true">Color theme</item>
+            </item>
+        </argument>
+        <field name="preset_id">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vkr\Kalman\Model\Source\Preset</item>
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">string</item>
+                    <item name="label" xsi:type="string" translate="true">Preset</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="dataScope" xsi:type="string">preset_id</item>
+                    <item name="component" xsi:type="string">Vkr_Kalman/js/form/components/presetpicker</item>
+                </item>
+            </argument>
+        </field>
+        <field name="general_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">General color</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">12</item>
+                    <item name="dataScope" xsi:type="string">general_color</item>
+                    <item name="component" xsi:type="string">Vkr_Kalman/js/form/components/colorpicker</item>
+                    <item name="required" xsi:type="boolean">true</item>
+                    <item name="notice"  xsi:type="string" translate="true">Color of title, description, active dot, not active dots (opacity 40%), arrows</item>
+                </item>
+            </argument>
+        </field>
+        <field name="title_hover_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Title hover color</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="dataScope" xsi:type="string">title_hover_color</item>
+                    <item name="component" xsi:type="string">Vkr_Kalman/js/form/components/colorpicker</item>
+                </item>
+            </argument>
+        </field>
+        <field name="description_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Description color</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="dataScope" xsi:type="string">description_color</item>
+                    <item name="component" xsi:type="string">Vkr_Kalman/js/form/components/colorpicker</item>
+                    <item name="notice"  xsi:type="string" translate="true">If you need different from general color</item>
+                </item>
+            </argument>
+        </field>
+        <field name="header_elements_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Header elements color</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="dataScope" xsi:type="string">header_elements_color</item>
+                    <item name="component" xsi:type="string">Vkr_Kalman/js/form/components/colorpicker</item>
+                </item>
+            </argument>
+        </field>
+        <field name="header_minicart_qty_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Minicart product quantity color</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">45</item>
+                    <item name="dataScope" xsi:type="string">header_minicart_qty_color</item>
+                    <item name="component" xsi:type="string">Vkr_Kalman/js/form/components/colorpicker</item>
+                    <item name="note" xsi:type="string" translate="true">In header</item>
+                </item>
+            </argument>
+        </field>
+        <field name="button_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Button color</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="dataScope" xsi:type="string">button_color</item>
+                    <item name="component" xsi:type="string">Vkr_Kalman/js/form/components/colorpicker</item>
+                    <item name="notice"  xsi:type="string" translate="true">Color of button at rest and hovered inside text</item>
+                </item>
+            </argument>
+        </field>
+        <field name="button_hover_color">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Button hover color</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">banner</item>
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="dataScope" xsi:type="string">button_hover_color</item>
+                    <item name="component" xsi:type="string">Vkr_Kalman/js/form/components/colorpicker</item>
+                    <item name="notice"  xsi:type="string" translate="true">Color of hovered button and inside text at rest</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+</form>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+
+        <add id="Vkr_Kalman::admin"
+             resource="Vkr_Kalman::kalman"
+             module="Vkr_Kalman"
+             title="Kalman recommendation"
+             sortOrder="200"/>
+
+        <add id="Vkr_Kalman::kalman"
+             title="Attributes"
+             translate="title"
+             module="Vkr_Kalman"
+             sortOrder="40"
+             parent="Vkr_Kalman::admin"
+             action="kalman/attributes"
+             resource="Vkr_Kalman::kalman"/>
+    </menu>
+</config>

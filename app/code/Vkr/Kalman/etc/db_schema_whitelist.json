@@ -1,0 +1,11 @@
+{
+    "kalman_attributes": {
+        "column": {
+            "attribute_id": true,
+            "name": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
