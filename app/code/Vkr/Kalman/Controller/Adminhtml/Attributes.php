@@ -45,6 +45,7 @@ abstract class Attributes extends \Magento\Backend\App\Action
     protected function initAttribute()
     {
         $id = (int) $this->getRequest()->getParam('attribute_id');
+
         $banner = $this->bannerFactory->create();
         if ($id) {
             $banner = $this->bannerRepository->get($id);

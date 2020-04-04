@@ -29,4 +29,13 @@ class Attribute extends AbstractModel implements AttributeInterface, IdentityInt
         return [self::CACHE_TAG, $this->getEntityCacheTag()];
     }
 
+    public function getAttributeId()
+    {
+        return (string) $this->getData(self::ID);
+    }
+    public function setAttributeId($id)
+    {
+        return $this->setData(self::ID, $id);
+    }
+
 }

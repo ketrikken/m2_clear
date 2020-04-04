@@ -5988,7 +5988,7 @@ Tests:
   * Fixed validation message for the Quantity field on the product page in the backend
   * Fixed the email template for sharing a Wishlist
   * Fixed the response of the drop-down menu in the Plushe theme
-  * Fixed the missing Related Banners tab for Catalog Price Rule
+  * Fixed the missing Related Kalmans tab for Catalog Price Rule
   * Fixed inability to enable the duplicated product
   * Removed warnings on saving payment method configuration
   * Fixed gift messages displaying on the Order View page after admin edits

@@ -1,6 +1,6 @@
 {
     "options": {
-        "stripBanners": true,
+        "stripKalmans": true,
         "banner": "/**\n * Copyright © <%= grunt.template.today(\"yyyy\") %> Magento. All rights reserved.\n * See COPYING.txt for license details.\n */\n"
     },
     "setup": {

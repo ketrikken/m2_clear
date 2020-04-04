@@ -6,7 +6,7 @@
         <add id="Vkr_Kalman::admin"
              resource="Vkr_Kalman::kalman"
              module="Vkr_Kalman"
-             title="Kalman recommendation"
+             title="Kalman recommendation22"
              sortOrder="200"/>
 
         <add id="Vkr_Kalman::kalman"

@@ -59,7 +59,7 @@ atlassian*
 /pub/media/captcha/*
 /pub/static/*
 !/pub/static/.htaccess
-
+composer*
 /var/*
 !/var/.htaccess
 /vendor/*
@@ -67,3 +67,8 @@ atlassian*
 /generated/*
 !/generated/.htaccess
 .DS_Store
+/setup/*
+/lib/*
+/update/*
+/pub/*
+

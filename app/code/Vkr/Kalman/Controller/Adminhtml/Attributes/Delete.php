@@ -15,22 +15,22 @@ class Delete extends \Vkr\Kalman\Controller\Adminhtml\Attributes
     {
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();
-        $id = $this->getRequest()->getParam('id');
+        $id = $this->getRequest()->getParam('attribute_id');
         if ($id) {
             try {
                 $banner = $this->bannerRepository->get($id);
                 $this->bannerRepository->delete($banner);
-                $this->messageManager->addSuccessMessage(__('You deleted the banner.'));
+                $this->messageManager->addSuccessMessage(__('You deleted the attribute.'));
                 return $resultRedirect->setPath('*/*/');
             } catch (NoSuchEntityException $e) {
-                $this->messageManager->addErrorMessage(__('We can\'t find a banner to delete.'));
+                $this->messageManager->addErrorMessage(__('We can\'t find a attribute to delete.'));
                 return $resultRedirect->setPath('*/*/');
             } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
-                return $resultRedirect->setPath('*/*/edit', ['id' => $id]);
+                return $resultRedirect->setPath('*/*/edit', ['attribute_id' => $id]);
             }
         }
-        $this->messageManager->addErrorMessage(__('We can\'t find a banner to delete.'));
+        $this->messageManager->addErrorMessage(__('We can\'t find a attribute to delete.'));
         return $resultRedirect->setPath('*/*/');
     }
 }

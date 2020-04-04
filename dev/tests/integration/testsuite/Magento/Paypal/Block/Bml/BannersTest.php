@@ -7,7 +7,7 @@ namespace Magento\Paypal\Block\Bml;
 
 use Magento\TestFramework\Helper\Bootstrap;
 
-class BannersTest extends \PHPUnit\Framework\TestCase
+class KalmansTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @param int $publisherId
@@ -54,7 +54,7 @@ class BannersTest extends \PHPUnit\Framework\TestCase
         /** @var \Magento\Framework\View\LayoutInterface $layout */
         $layout = Bootstrap::getObjectManager()->get(\Magento\Framework\View\LayoutInterface::class);
         $block = $layout->createBlock(
-            \Magento\Paypal\Block\Bml\Banners::class,
+            \Magento\Paypal\Block\Bml\Kalmans::class,
             '',
             [
                 'paypalConfig' => $paypalConfig,

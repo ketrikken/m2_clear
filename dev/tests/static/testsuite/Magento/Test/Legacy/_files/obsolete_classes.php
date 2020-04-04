@@ -2674,7 +2674,7 @@ return [
     ['Magento\Cataloginventory\Model\Resource\Indexer\Stock'],
     ['Magento\Catalog\Model\Product\Indexer\Eav'],
     ['Magento\Bundle\Pricing\Price\BasePriceInterface'],
-    ['Magento\Banner\Helper\Data'],
+    ['Magento\Kalman\Helper\Data'],
     ['Magento\Cms\Helper\Data'],
     ['Magento\Cron\Helper\Data'],
     ['Magento\Email\Helper\Data'],

@@ -11,29 +11,25 @@ class Save extends \Vkr\Kalman\Controller\Adminhtml\Attributes
         $resultRedirect = $this->resultRedirectFactory->create();
         $formData = $this->getRequest()->getPostValue();
         if ($formData) {
-            $id = $this->getRequest()->getParam('id');
+            $id = $this->getRequest()->getParam('attribute_id');
             $bannerData = $formData;
 
-            if (empty($bannerData['id'])) {
-                $bannerData['id'] = null;
+            if (empty($bannerData['attribute_id'])) {
+                $bannerData['attribute_id'] = null;
             }
-            $banner = $this->initKalman();
+            $banner = $this->initAttribute();
 
-            if (!$banner->getId() && $id) {
-                $this->messageManager->addErrorMessage(__('This banner no longer exists.'));
+            if (!$banner->getAttributeId() && $id) {
+                $this->messageManager->addErrorMessage(__('This attribute no longer exists.'));
                 return $resultRedirect->setPath('*/*/');
             }
-
-            $bannerData = $this->processImages($banner, $bannerData);
-            $banner->addData($this->filterKalmanPostData($banner, $bannerData));
-
+            $banner->addData($bannerData);
             try {
                 $this->bannerRepository->save($banner);
-                $this->messageManager->addSuccessMessage(__('You saved the banner.'));
-                $this->dataPersistor->clear('banner');
+                $this->messageManager->addSuccessMessage(__('You saved the attribute.'));
 
                 if ($this->getRequest()->getParam('back')) {
-                    return $resultRedirect->setPath('*/*/edit', ['id' => $banner->getId()]);
+                    return $resultRedirect->setPath('*/*/edit', ['attribute_id' => $banner->getAttributeId()]);
                 }
                 return $resultRedirect->setPath('*/*/');
             } catch (LocalizedException $e) {
@@ -42,42 +38,11 @@ class Save extends \Vkr\Kalman\Controller\Adminhtml\Attributes
                 $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the banner.'));
             }
 
-            $this->dataPersistor->set('banner', $formData);
             return $resultRedirect->setPath('*/*/edit', [
-                    'id' => $this->getRequest()->getParam('id')
+                    'attribute_id' => $this->getRequest()->getParam('attribute_id')
                 ]
             );
         }
         return $resultRedirect->setPath('*/*/');
-    }
-
-    private function processImages(\Vkr\Kalman\Model\Kalman $banner, $data)
-    {
-        foreach ($banner->getImageAttributes() as $attribute) {
-            if (empty($data[$attribute])) {
-                unset($data[$attribute]);
-                $data[$attribute]['delete'] = true;
-            }
-        }
-        return $data;
-    }
-
-    protected function filterKalmanPostData(\Vkr\Kalman\Model\Kalman $banner, array $rawData)
-    {
-        $data = $rawData;
-        foreach ($banner->getImageAttributes() as $attribute) {
-            if (isset($data[$attribute]) && is_array($data[$attribute])) {
-                if (!empty($data[$attribute]['delete'])) {
-                    $data[$attribute] = null;
-                } else {
-                    if (isset($data[$attribute][0]['name']) && isset($data[$attribute][0]['tmp_name'])) {
-                        $data[$attribute] = $data[$attribute][0]['name'];
-                    } else {
-                        unset($data[$attribute]);
-                    }
-                }
-            }
-        }
-        return $data;
     }
 }
