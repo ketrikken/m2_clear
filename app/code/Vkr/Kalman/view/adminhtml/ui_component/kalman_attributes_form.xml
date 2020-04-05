@@ -3,22 +3,13 @@
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-<<<<<<< Updated upstream
-            <item name="provider" xsi:type="string">kalman_attribute_form.kalman_attribute_form_data_source</item>
-            <item name="deps" xsi:type="string">kalman_attribute_form.kalman_attribute_form_data_source</item>
-=======
             <item name="provider" xsi:type="string">kalman_attributes_form.kalman_attributes_form_data_source</item>
             <item name="deps" xsi:type="string">kalman_attributes_form.kalman_attributes_form_data_source</item>
->>>>>>> Stashed changes
         </item>
         <item name="label" xsi:type="string" translate="true">General Information</item>
         <item name="config" xsi:type="array">
             <item name="dataScope" xsi:type="string">data</item>
-<<<<<<< Updated upstream
-            <item name="namespace" xsi:type="string">kalman_attribute_form</item>
-=======
             <item name="namespace" xsi:type="string">kalman_attributes_form</item>
->>>>>>> Stashed changes
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
         <item name="buttons" xsi:type="array">
@@ -29,26 +20,15 @@
             <item name="save_and_continue" xsi:type="string">Vkr\Kalman\Block\Adminhtml\Attributes\Edit\Form\Button\SaveAndContinue</item>
         </item>
     </argument>
-<<<<<<< Updated upstream
-    <dataSource name="kalman_attribute_form_data_source">
-        <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Vkr\Kalman\Ui\DataProvider\Attribute\Form\DataProvider</argument>
-            <argument name="name" xsi:type="string">kalman_attribute_form_data_source</argument>
-=======
     <dataSource name="kalman_attributes_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Vkr\Kalman\Ui\DataProvider\Attribute\Form\DataProvider</argument>
             <argument name="name" xsi:type="string">kalman_attributes_form_data_source</argument>
->>>>>>> Stashed changes
             <argument name="primaryFieldName" xsi:type="string">attribute_id</argument>
             <argument name="requestFieldName" xsi:type="string">attribute_id</argument>
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-<<<<<<< Updated upstream
-                    <item name="submit_url" xsi:type="url" path="kalman/attribute/save"/>
-=======
                     <item name="submit_url" xsi:type="url" path="kalman/attributes/save"/>
->>>>>>> Stashed changes
                 </item>
             </argument>
         </argument>
@@ -64,11 +44,7 @@
                 <item name="label" xsi:type="string">General</item>
             </item>
         </argument>
-<<<<<<< Updated upstream
-        <field name="id">
-=======
         <field name="attribute_id">
->>>>>>> Stashed changes
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="visible" xsi:type="boolean">false</item>

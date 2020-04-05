@@ -21,11 +21,11 @@ class Generic
      *
      * @return int|null
      */
-    public function getKalmanId()
+    public function getAttributeId()
     {
         try {
             return $this->bannerRepository->get(
-                $this->context->getRequest()->getParam('id')
+                $this->context->getRequest()->getParam('attribute_id')
             )->getId();
         } catch (NoSuchEntityException $e) {
         }

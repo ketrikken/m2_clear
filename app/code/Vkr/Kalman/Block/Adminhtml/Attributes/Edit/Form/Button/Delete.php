@@ -12,9 +12,9 @@ class Delete extends Generic implements ButtonProviderInterface
     public function getButtonData()
     {
         $data = [];
-        if ($this->getKalmanId()) {
+        if ($this->getAttributeId()) {
             $data = [
-                'label'    => __('Delete Kalman'),
+                'label'    => __('Delete Attribute'),
                 'class'    => 'delete',
                 'on_click' => 'deleteConfirm(\'' . __(
                         'Are you sure you want to do this?'
@@ -30,6 +30,6 @@ class Delete extends Generic implements ButtonProviderInterface
      */
     public function getDeleteUrl()
     {
-        return $this->getUrl('*/*/delete', ['id' => $this->getKalmanId()]);
+        return $this->getUrl('*/*/delete', ['attribute_id' => $this->getAttributeId()]);
     }
 }
