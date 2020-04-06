@@ -2,10 +2,24 @@
     "kalman_attributes": {
         "column": {
             "attribute_id": true,
-            "name": true
+            "name": true,
+            "product_attribute": true
         },
         "constraint": {
             "PRIMARY": true
+        }
+    },
+    "kalman_customer_attributes": {
+        "column": {
+            "id": true,
+            "customer_id": true,
+            "name": true,
+            "attributes": true,
+            "result": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "KALMAN_CUSTOMER_ATTRIBUTES_CUSTOMER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
         }
     }
 }

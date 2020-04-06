@@ -55,27 +55,6 @@
                 </item>
             </argument>
         </field>
-        <field name="is_enabled">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="dataType" xsi:type="string">boolean</item>
-                    <item name="label" xsi:type="string" translate="true">Enable Attribute</item>
-                    <item name="formElement" xsi:type="string">checkbox</item>
-                    <item name="source" xsi:type="string">banner</item>
-                    <item name="sortOrder" xsi:type="number">8</item>
-                    <item name="dataScope" xsi:type="string">is_enabled</item>
-                    <item name="prefer" xsi:type="string">toggle</item>
-                    <item name="valueMap" xsi:type="array">
-                        <item name="true" xsi:type="number">1</item>
-                        <item name="false" xsi:type="number">0</item>
-                    </item>
-                    <item name="default" xsi:type="number">1</item>
-                    <item name="tooltip" xsi:type="array">
-                        <item name="description" xsi:type="string" translate="true">If disabled, than attribute will never be used.</item>
-                    </item>
-                </item>
-            </argument>
-        </field>
 
         <field name="name">
             <argument name="data" xsi:type="array">
@@ -83,12 +62,40 @@
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Name</item>
                     <item name="formElement" xsi:type="string">input</item>
-                    <item name="source" xsi:type="string">banner</item>
+                    <item name="source" xsi:type="string">name</item>
                     <item name="sortOrder" xsi:type="number">15</item>
                     <item name="dataScope" xsi:type="string">name</item>
                     <item name="required" xsi:type="boolean">true</item>
                     <item name="tooltip" xsi:type="array">
                         <item name="description" xsi:type="string" translate="true">Internal name to display in admin</item>
+                    </item>
+                </item>
+            </argument>
+        </field>
+        <field name="product_attribute" class="Vkr\Kalman\Ui\Attribute\Edit\Form\DisableProductAttribute">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Vkr\Kalman\Model\Config\Source\ProductAttribute</item>
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">Product Attribute List</item>
+                    <item name="componentType" xsi:type="string">field</item>
+                    <item name="formElement" xsi:type="string">select</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                    <item name="elementTmpl" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                    <item name="dataScope" xsi:type="string">product_attribute</item>
+                    <item name="filterOptions" xsi:type="boolean">false</item>
+                    <item name="showCheckbox" xsi:type="boolean">true</item>
+                    <item name="chipsEnabled" xsi:type="boolean">true</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="multiple" xsi:type="boolean">0</item>
+                    <item name="sortOrder" xsi:type="number">2</item>
+                    <item name="listens" xsi:type="array">
+                        <item name="newOption" xsi:type="string">toggleOptionSelected</item>
+                    </item>
+                    <item name="required" xsi:type="boolean">0</item>
+                    <item name="source" xsi:type="string">conditions</item>
+                    <item name="validation" xsi:type="array">
+                        <item name="required-entry" xsi:type="boolean">true</item>
                     </item>
                 </item>
             </argument>
