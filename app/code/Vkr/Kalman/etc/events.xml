@@ -7,4 +7,9 @@
                   instance="Vkr\Kalman\Observer\AddValues\AddToCart"/>
     </event>
 
+    <event name="catalog_product_view">
+        <observer name="catalog_product_view_config_add_customer_attribute_values"
+                  instance="Vkr\Kalman\Observer\AddValues\OpenPdp"/>
+    </event>
+
 </config>

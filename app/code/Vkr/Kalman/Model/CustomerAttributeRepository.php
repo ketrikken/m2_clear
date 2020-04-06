@@ -14,7 +14,7 @@ class CustomerAttributeRepository
     private $resource;
 
     public function __construct(
-        \Vkr\Kalman\Model\CustomerAttribute $modelFactory,
+        \Vkr\Kalman\Model\CustomerAttributeFactory $modelFactory,
         \Vkr\Kalman\Model\ResourceModel\CustomerAttribute $resource
     ) {
         $this->modelFactory = $modelFactory;
@@ -29,6 +29,8 @@ class CustomerAttributeRepository
         if (!$model->getId()) {
             $model->setCustomerId($customerId);
             $model->setAttributes(serialize($values));
+            $model->save();
+            return;
         }
         $customerAttributes = unserialize($model->getAttributes());
         foreach ($values as $id => $value) {
@@ -38,6 +40,7 @@ class CustomerAttributeRepository
                 $customerAttributes[$id] += $value;
             }
         }
+        $model->setAttributes(serialize($customerAttributes));
         $model->save();
     }
 

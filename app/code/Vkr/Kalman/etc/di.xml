@@ -13,4 +13,8 @@
     <preference for="Vkr\Kalman\Api\Data\AttributeInterface"
                 type="Vkr\Kalman\Model\Attribute"/>
 
+    <preference for="Magento\Catalog\Controller\Product\View"
+                type="Vkr\Kalman\Controller\Product\View"/>
+
+
 </config>

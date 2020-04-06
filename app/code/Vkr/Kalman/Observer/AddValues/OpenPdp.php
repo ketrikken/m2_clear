@@ -7,28 +7,34 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 
-class AddToCart implements ObserverInterface
+class OpenPdp implements ObserverInterface
 {
-    const VALUE_ADD_TO_CART = 3;
+    const VALUE_OPEN_PDP = 1;
 
     private $customerAttributeRepository;
     private $attributeCollection;
+    private $customerSession;
+    private $product;
 
     public function __construct(
         \Vkr\Kalman\Model\CustomerAttributeRepository $customerAttributeRepository,
-        \Vkr\Kalman\Model\ResourceModel\Attribute\CollectionFactory $attributeCollectionFactory
+        \Vkr\Kalman\Model\ResourceModel\Attribute\CollectionFactory $attributeCollectionFactory,
+        \Magento\Customer\Model\Session $customerSession,
+        \Magento\Catalog\Model\ProductFactory $productFactory
     ) {
         $this->customerAttributeRepository = $customerAttributeRepository;
         $this->attributeCollection = $attributeCollectionFactory->create();
+        $this->customerSession = $customerSession;
+        $this->product = $productFactory->create();
     }
 
     public function execute(Observer $observer)
     {
-        $product = $observer->getEvent()->getProduct();
-        $quote = $observer->getEvent()->getQuoteItem()->getQuote();
-        $customerId = $quote->getCustomer()->getId();
+        $productId = $observer->getEvent()->getProductId();
+        $product = $this->product->load($productId);
+        $customerId = $this->customerSession->getCustomer()->getId();
 
-        if (!self::VALUE_ADD_TO_CART || !$customerId || !$product) {
+        if (!self::VALUE_OPEN_PDP || !$customerId || !$product || !$product->getId()) {
             return $this;
         }
         $values = [];
@@ -39,7 +45,7 @@ class AddToCart implements ObserverInterface
                 continue;
             }
             //id new model
-            $values[$attributeItem->getProductAttribute()] = self::VALUE_ADD_TO_CART;
+            $values[$attributeItem->getProductAttribute()] = self::VALUE_OPEN_PDP;
         }
         $this->customerAttributeRepository->setValues($customerId, $values);
         return $this;
