@@ -9,26 +9,31 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class AddToCart implements ObserverInterface
 {
-    const VALUE_ADD_TO_CART = 3;
-
     private $customerAttributeRepository;
     private $attributeCollection;
+    private $configProcessor;
 
     public function __construct(
         \Vkr\Kalman\Model\CustomerAttributeRepository $customerAttributeRepository,
-        \Vkr\Kalman\Model\ResourceModel\Attribute\CollectionFactory $attributeCollectionFactory
+        \Vkr\Kalman\Model\ResourceModel\Attribute\CollectionFactory $attributeCollectionFactory,
+        \Vkr\Kalman\Model\Config\ConfigProcessor $configProcessor
     ) {
         $this->customerAttributeRepository = $customerAttributeRepository;
         $this->attributeCollection = $attributeCollectionFactory->create();
+        $this->configProcessor = $configProcessor;
     }
 
     public function execute(Observer $observer)
     {
+        if (!$this->configProcessor->isEnabledTracking('add_to_cart')) {
+            return $this;
+        }
+        $valueToAdd = $this->configProcessor->getValueAddToCart();
         $product = $observer->getEvent()->getProduct();
         $quote = $observer->getEvent()->getQuoteItem()->getQuote();
         $customerId = $quote->getCustomer()->getId();
 
-        if (!self::VALUE_ADD_TO_CART || !$customerId || !$product) {
+        if (!$valueToAdd || !$customerId || !$product) {
             return $this;
         }
         $values = [];
@@ -39,7 +44,7 @@ class AddToCart implements ObserverInterface
                 continue;
             }
             //id new model
-            $values[$attributeItem->getProductAttribute()] = self::VALUE_ADD_TO_CART;
+            $values[$attributeItem->getProductAttribute()] = $valueToAdd;
         }
         $this->customerAttributeRepository->setValues($customerId, $values);
         return $this;

@@ -7,8 +7,9 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 
-class OpenPdp implements ObserverInterface
+class MakeOrder implements ObserverInterface
 {
+
     private $customerAttributeRepository;
     private $attributeCollection;
     private $customerSession;
@@ -31,27 +32,34 @@ class OpenPdp implements ObserverInterface
 
     public function execute(Observer $observer)
     {
-        if (!$this->configProcessor->isEnabledTracking('open_pdp')) {
+        if (!$this->configProcessor->isEnabledTracking('create_order')) {
             return $this;
         }
-        $valueToAdd = $this->configProcessor->getValueOpenPdp();
-        $productId = $observer->getEvent()->getProductId();
-        $product = $this->product->load($productId);
+        $valueToAdd = $this->configProcessor->getValueCreateOrder();
+        $order = $observer->getEvent()->getOrder();
         $customerId = $this->customerSession->getCustomer()->getId();
-
-        if (!$valueToAdd || !$customerId || !$product || !$product->getId()) {
-            return $this;
-        }
-        $values = [];
         $attributeItems = $this->attributeCollection->getItems();
-        foreach ($attributeItems as $attributeItem) {
-            $productValue = $product->getData($attributeItem->getProductAttribute());
-            if (!$productValue) {
-                continue;
+        $values = [];
+        foreach ($order->getItems() as $item) {
+            $product = $item->getProduct();
+
+            if (!$valueToAdd || !$customerId || !$product || !$product->getId()) {
+                return $this;
             }
-            //id new model
-            $values[$attributeItem->getProductAttribute()] = $valueToAdd;
+            foreach ($attributeItems as $attributeItem) {
+                $productValue = $product->getData($attributeItem->getProductAttribute());
+                if (!$productValue) {
+                    continue;
+                }
+                //id new model
+                if (!isset($values[$attributeItem->getProductAttribute()])) {
+                    $values[$attributeItem->getProductAttribute()] = 0;
+                }
+                $values[$attributeItem->getProductAttribute()] += $valueToAdd;
+
+            }
         }
+
         $this->customerAttributeRepository->setValues($customerId, $values);
         return $this;
     }

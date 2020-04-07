@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="kalman" translate="label" sortOrder="100">
+            <label>Kalman Recommendation</label>
+        </tab>
+        <section id="attributes" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Attributes</label>
+            <tab>kalman</tab>
+            <resource>Vkr_Kalman::kalman</resource>
+            <group id="tracking" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Tracking Configuration</label>
+                <field id="enabled_tracking" translate="label" type="multiselect" sortOrder="180" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enabled tracking events</label>
+                    <source_model>Vkr\Kalman\Model\Config\Source\EnabledTracking</source_model>
+                </field>
+
+                <field id="add_to_cart_value" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Add to cart value</label>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-0-100</validate>
+                    <comment>From 0 to 100, if 0 or not set used default value 3</comment>
+                </field>
+                <field id="add_to_order_value" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Create order value</label>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-0-100</validate>
+                    <comment>From 0 to 100, if 0 or not set used default value 5</comment>
+                </field>
+                <field id="open_pdp_value" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Open pdp value</label>
+                    <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-0-100</validate>
+                    <comment>From 0 to 100, if 0 or not set used default value 1</comment>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>
