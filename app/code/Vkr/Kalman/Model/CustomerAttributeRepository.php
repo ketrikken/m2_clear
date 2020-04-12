@@ -12,13 +12,16 @@ class CustomerAttributeRepository
 
     private $modelFactory;
     private $resource;
+    protected $kalmanProcessor;
 
     public function __construct(
         \Vkr\Kalman\Model\CustomerAttributeFactory $modelFactory,
-        \Vkr\Kalman\Model\ResourceModel\CustomerAttribute $resource
+        \Vkr\Kalman\Model\ResourceModel\CustomerAttribute $resource,
+        \Vkr\Kalman\Model\KalmanProcessor $kalmanProcessor
     ) {
         $this->modelFactory = $modelFactory;
-        $this->resource     = $resource;
+        $this->resource = $resource;
+        $this->kalmanProcessor = $kalmanProcessor;
     }
 
     public function setValues($customerId, $values)
@@ -28,7 +31,11 @@ class CustomerAttributeRepository
 
         if (!$model->getId()) {
             $model->setCustomerId($customerId);
-            $model->setAttributes(serialize($values));
+            $model->setAttributes(serialize($values));// чистые данные
+            //засетить только новое значение по калману
+            $result = $this->kalmanProcessor->getKalmanValue(serialize($values), null, null, null);
+            $model->setNewX(serialize($result['x']));
+            $model->setNewP(serialize($result['P']));
             $model->save();
             return;
         }
@@ -40,9 +47,53 @@ class CustomerAttributeRepository
                 $customerAttributes[$id] += $value;
             }
         }
+        // расчитать новое значение, и поменять местами старое и новое.
         $model->setAttributes(serialize($customerAttributes));
+
+        $oldValueX = $model->getOldX();
+        $newValueX = $model->getNewX();
+        $newValueP = $model->getNewP();
+        $result = $this->kalmanProcessor->getKalmanValue(serialize($customerAttributes), $oldValueX, $newValueX, $newValueP);
+
+        $model->setOldX($model->getNewX());
+        $model->setNewX(serialize($result['x']));
+        $model->setNewP(serialize($result['P']));
+
         $model->save();
     }
 
+    public function needUpdate($customerId)
+    {
+        $model = $this->modelFactory->create();
+        $this->resource->load($model, $customerId, 'customer_id');
+
+        if (!$model->getId()) {
+            return 0;
+        }
+        return $model->getNeedRecalculation();
+    }
+
+    public function setKalmanResults($customerId, $value)
+    {
+        $model = $this->modelFactory->create();
+        $this->resource->load($model, $customerId, 'customer_id');
+
+        if (!$model->getId()) {
+            return;
+        }
+
+        $oldValue = $model->getKalmanOld();
+        $newValue = $model->getKalmanNew();
+
+        if ($newValue) {
+            $oldValue = $newValue;
+        }
+        $newValue = $value;
+
+        $model->setKalmanOld($oldValue);
+        $model->setKalmanNew($newValue);
+        $model->save();
+
+    }
 
 }

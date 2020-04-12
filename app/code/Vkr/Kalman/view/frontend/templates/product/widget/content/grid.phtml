@@ -4,7 +4,6 @@ use Magento\Framework\App\Action\Action;
 
 /** @var \Vkr\Kalman\Block\Product\ProductsList $block */
 ?>
-
 <?php if ($exist = ($block->getProductCollection() && $block->getProductCollection()->getSize())) : ?>
     <?php
     $type = 'widget-product-grid';

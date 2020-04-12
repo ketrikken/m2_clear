@@ -17,7 +17,10 @@
         <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false"
                 comment="customer_id"/>
         <column xsi:type="varchar" name="attributes" nullable="false" length="1024" comment="Attributes"/>
-        <column xsi:type="varchar" name="result"  length="1024" comment="result"/>
+
+        <column xsi:type="varchar" name="oldX" nullable="true" length="1024" comment="kalman_old"/>
+        <column xsi:type="varchar" name="newX" nullable="true" length="1024" comment="kalman_old"/>
+        <column xsi:type="varchar" name="newP" nullable="true" length="1024" comment="kalman_old"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>

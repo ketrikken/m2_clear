@@ -6,6 +6,8 @@ use Magento\Checkout\Model\Type\Onepage;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
+use MathPHP\LinearAlgebra\Vector;
+use MathPHP\LinearAlgebra\MatrixFactory;
 
 class OpenPdp implements ObserverInterface
 {
@@ -14,19 +16,25 @@ class OpenPdp implements ObserverInterface
     private $customerSession;
     private $product;
     private $configProcessor;
+    protected $layoutFactory;
+    protected $kalmanCalculate;
 
     public function __construct(
         \Vkr\Kalman\Model\CustomerAttributeRepository $customerAttributeRepository,
         \Vkr\Kalman\Model\ResourceModel\Attribute\CollectionFactory $attributeCollectionFactory,
         \Magento\Customer\Model\Session $customerSession,
         \Magento\Catalog\Model\ProductFactory $productFactory,
-        \Vkr\Kalman\Model\Config\ConfigProcessor $configProcessor
+        \Vkr\Kalman\Model\Config\ConfigProcessor $configProcessor,
+        \Magento\Framework\View\Result\PageFactory $layoutFactory,
+        \Vkr\Kalman\Model\KalmanCalculate $kalmanCalculate
     ) {
         $this->customerAttributeRepository = $customerAttributeRepository;
         $this->attributeCollection = $attributeCollectionFactory->create();
         $this->customerSession = $customerSession;
         $this->product = $productFactory->create();
         $this->configProcessor = $configProcessor;
+        $this->layoutFactory = $layoutFactory;
+        $this->kalmanCalculate = $kalmanCalculate;
     }
 
     public function execute(Observer $observer)
@@ -53,6 +61,7 @@ class OpenPdp implements ObserverInterface
             $values[$attributeItem->getProductAttribute()] = $valueToAdd;
         }
         $this->customerAttributeRepository->setValues($customerId, $values);
+
         return $this;
     }
 }
