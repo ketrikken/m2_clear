@@ -97,7 +97,7 @@ define([
                 this.prepareDataFromCustomerData(customerData.get(this.identifiersConfig.namespace)())
             );
 
-            //this.productStorage.setIds(this.data.currency, this.data.store, this.ids());
+            this.productStorage.setIds(this.data.currency, this.data.store, this.ids());
 
         },
 

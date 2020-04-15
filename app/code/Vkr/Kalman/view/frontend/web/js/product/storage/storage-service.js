@@ -8,7 +8,7 @@ define([
     'mageUtils',
     'mage/translate',
     'Magento_Catalog/js/product/storage/ids-storage',
-    'Vkr_Kalman/js/product/storage/data-storage',
+    'Magento_Catalog/js/product/storage/data-storage',
     'Magento_Catalog/js/product/storage/ids-storage-compare',
     'Vkr_Kalman/js/product/storage/ids-storage-kalman'
 ], function ($, _, utils, $t, IdsStorage, DataStore, IdsStorageCompare, IdsStorageKalman) {

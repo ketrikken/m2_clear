@@ -119,7 +119,7 @@ class ProductViewCounter extends Template
         /** @var Store $store */
         $store = $this->storeManager->getStore();
 
-        if (1 || !$product || !$product->getId()) {
+        if (!$product || !$product->getId()) {
             return $this->serialize->serialize([
                 'items' => [],
                 'store' => $store->getId(),

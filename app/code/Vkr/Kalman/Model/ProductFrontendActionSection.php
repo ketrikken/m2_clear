@@ -248,7 +248,7 @@ class ProductFrontendActionSection implements SectionSourceInterface
 
 
         return [
-            'count' => 500,//count($items),
+            'count' => count($items),
             'items' => $items,
         ];
     }

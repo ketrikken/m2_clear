@@ -46,7 +46,7 @@
         <argument name="data" xsi:type="array">
             <item name="config" xsi:type="array">
                 <item name="label" xsi:type="string" translate="true">Kalman Recently Viewed</item>
-                <item name="additionalClasses" xsi:type="string">widget </item>
+                <item name="additionalClasses" xsi:type="string">widget block-viewed-products-grid</item>
                 <item name="listTemplate" xsi:type="string">Magento_Catalog/product/list/listing</item>
             </item>
         </argument>
