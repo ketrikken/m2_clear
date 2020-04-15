@@ -59,7 +59,7 @@ class KalmanProcessor
         if (is_null($u)) {
             $u = MatrixFactory::Zero($n, 1);
         } else {
-            $u = MatrixFactory::Zero($u);
+            $u = MatrixFactory::create($u);
         }
 
         $ob = [

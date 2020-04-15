@@ -17,4 +17,12 @@
                 type="Vkr\Kalman\Controller\Product\View"/>
 
 
+    <type name="Magento\Catalog\Model\FrontendStorageConfigurationPool">
+        <arguments>
+            <argument name="storageConfigurations" xsi:type="array">
+                <item name="kalman_recently_viewed_product" xsi:type="object">Vkr\Kalman\Model\Widget\RecentlyViewedStorageConfiguration</item>
+            </argument>
+        </arguments>
+    </type>
+
 </config>

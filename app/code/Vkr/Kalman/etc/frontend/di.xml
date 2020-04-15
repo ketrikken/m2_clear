@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+
+    <type name="Magento\Customer\CustomerData\SectionPool">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="kalman_recently_viewed_product" xsi:type="string">Magento\Catalog\CustomerData\KalmanRecentlyViewedProductsSection</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento\Catalog\CustomerData\KalmanRecentlyViewedProductsSection" type="Vkr\Kalman\Model\ProductFrontendActionSection">
+        <arguments>
+            <argument name="typeId" xsi:type="string">kalman_recently_viewed_product</argument>
+        </arguments>
+    </virtualType>
+
+</config>

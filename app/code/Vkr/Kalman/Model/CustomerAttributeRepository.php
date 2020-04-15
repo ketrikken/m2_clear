@@ -26,6 +26,7 @@ class CustomerAttributeRepository
 
     public function setValues($customerId, $values)
     {
+        return;
         $model = $this->modelFactory->create();
         $this->resource->load($model, $customerId, 'customer_id');
 
@@ -60,40 +61,6 @@ class CustomerAttributeRepository
         $model->setNewP(serialize($result['P']));
 
         $model->save();
-    }
-
-    public function needUpdate($customerId)
-    {
-        $model = $this->modelFactory->create();
-        $this->resource->load($model, $customerId, 'customer_id');
-
-        if (!$model->getId()) {
-            return 0;
-        }
-        return $model->getNeedRecalculation();
-    }
-
-    public function setKalmanResults($customerId, $value)
-    {
-        $model = $this->modelFactory->create();
-        $this->resource->load($model, $customerId, 'customer_id');
-
-        if (!$model->getId()) {
-            return;
-        }
-
-        $oldValue = $model->getKalmanOld();
-        $newValue = $model->getKalmanNew();
-
-        if ($newValue) {
-            $oldValue = $newValue;
-        }
-        $newValue = $value;
-
-        $model->setKalmanOld($oldValue);
-        $model->setKalmanNew($newValue);
-        $model->save();
-
     }
 
 }
