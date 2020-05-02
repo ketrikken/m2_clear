@@ -84,7 +84,7 @@ class KalmanProcessor
     {
         $result = [];
         foreach ($clearValues as $value) {
-            $result[] = $value;
+            $result[] = [$value];
         }
         return $result;
     }

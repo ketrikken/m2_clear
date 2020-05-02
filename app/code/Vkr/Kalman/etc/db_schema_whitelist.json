@@ -15,7 +15,10 @@
             "customer_id": true,
             "name": true,
             "attributes": true,
-            "result": true
+            "result": true,
+            "oldX": true,
+            "newX": true,
+            "newP": true
         },
         "constraint": {
             "PRIMARY": true,

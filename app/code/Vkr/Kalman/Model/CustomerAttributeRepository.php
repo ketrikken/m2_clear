@@ -26,7 +26,6 @@ class CustomerAttributeRepository
 
     public function setValues($customerId, $values)
     {
-        return;
         $model = $this->modelFactory->create();
         $this->resource->load($model, $customerId, 'customer_id');
 
@@ -56,9 +55,9 @@ class CustomerAttributeRepository
         $newValueP = $model->getNewP();
         $result = $this->kalmanProcessor->getKalmanValue(serialize($customerAttributes), $oldValueX, $newValueX, $newValueP);
 
-        $model->setOldX($model->getNewX());
-        $model->setNewX(serialize($result['x']));
-        $model->setNewP(serialize($result['P']));
+        $model->setData('oldX', $model->getNewX());
+        $model->setData('newX', serialize($result['x']));
+        $model->setData('newP', serialize($result['P']));
 
         $model->save();
     }

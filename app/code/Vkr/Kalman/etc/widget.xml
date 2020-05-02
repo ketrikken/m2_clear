@@ -75,8 +75,8 @@
 
     <widget id="kalman_catalog_recently_viewed" class="Vkr\Kalman\Block\Widget\RecentlyViewed"
             placeholder_image="Magento_Catalog::images/product_widget_viewed.png">
-        <label translate="true">Kalman Recently Viewed Products</label>
-        <description translate="true">List of Products Recently Viewed by Visitor</description>
+        <label translate="true">Kalman Products Recommendations</label>
+        <description translate="true">List of Products</description>
         <parameters>
             <parameter name="uiComponent" xsi:type="text" required="false" visible="false">
                 <label translate="true">UI Component</label>
